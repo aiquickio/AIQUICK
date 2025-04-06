@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIQuick - Automatización Inteligente para tu Negocio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        dark: '#000000',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(255,0,0,0.2) 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(255, 0, 0, 0.2), 0 10px 10px -5px rgba(255, 0, 0, 0.1);
+        }
+        .chatbot-toggle {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Chatbot -->
+    <div class="fixed bottom-8 right-8 z-50">
+        <div id="chatbot-container" class="hidden w-80 h-96 bg-gray-900 rounded-t-lg shadow-xl border border-primary flex flex-col">
+            <div class="bg-primary p-3 rounded-t-lg flex justify-between items-center">
+                <h3 class="font-bold">Asistente AIQuick</h3>
+                <button id="close-chatbot" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto">
+                <div class="mb-4">
+                    <div class="bg-gray-800 rounded-lg p-3 inline-block max-w-xs">
+                        <p>¡Hola! Soy Aura, tu asistente de AIQuick. ¿En qué puedo ayudarte hoy?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 border-t border-gray-700">
+                <div class="flex">
+                    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 bg-gray-800 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button id="send-message" class="bg-primary px-4 py-2 rounded-r-lg hover:bg-red-700 transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="chatbot-toggle" class="chatbot-toggle bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition">
+            <i class="fas fa-robot text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-90 py-4 px-6 sticky top-0 z-40 border-b border-primary">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-primary font-bold text-2xl mr-2"><i class="fas fa-bolt"></i></span>
+                <span class="text-white font-bold text-2xl">AI<span class="text-primary">Quick</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#features" class="text-white hover:text-primary transition">Servicios</a>
+                <a href="#benefits" class="text-white hover:text-primary transition">Beneficios</a>
+                <a href="#how-it-works" class="text-white hover:text-primary transition">Cómo funciona</a>
+                <a href="#testimonials" class="text-white hover:text-primary transition">Clientes</a>
+            </div>
+            <div>
+                <a href="#contact" class="bg-primary hover:bg-red-700 text-white px-6 py-2 rounded-full font-medium transition">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80" alt="AI Background" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="max-w-7xl mx-auto px-6 py-20 z-10 relative">
+            <div class="md:w-2/3">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    <span class="text-primary">Automatiza</span> tu negocio con inteligencia artificial
+                </h1>
+                <p class="text-xl text-gray-300 mb-10">
+                    AIQuick desarrolla agentes y bots personalizados que transforman tus operaciones, reducen costos y mejoran la experiencia de tus clientes.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="bg-primary hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg transition text-center">
+                        Solicitar demo <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#benefits" class="border-2 border-white hover:border-primary hover:text-primary text-white px-8 py-4 rounded-full font-bold text-lg transition text-center">
+                        Conoce los beneficios
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-black py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-primary text-4xl font-bold mb-2">+200</div>
+                    <div class="text-gray-400">Clientes satisfechos</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-primary text-4xl font-bold mb-2">24/7</div>
+                    <div class="text-gray-400">Soporte continuo</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-primary text-4xl font-bold mb-2">85%</div>
+                    <div class="text-gray-400">Reducción de costos</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-primary text-4xl font-bold mb-2">3.5x</div>
+                    <div class="text-gray-400">Retorno de inversión</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Needs Section -->
+    <section id="benefits" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Cómo AIQuick <span class="text-primary">resuelve tus necesidades</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Soluciones específicas para los desafíos de los negocios online
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6">Los desafíos de los negocios online</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-start">
+                            <div class="text-primary text-xl mr-4 mt-1">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Atención al cliente limitada</h4>
+                                <p class="text-gray-400">Los horarios restringidos y la falta de personal generan experiencias deficientes para tus clientes.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="text-primary text-xl mr-4 mt-1">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Procesos manuales ineficientes</h4>
+                                <p class="text-gray-400">Tareas repetitivas consumen tiempo valioso de tu equipo y generan errores costosos.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="text-primary text-xl mr-4 mt-1">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Falta de insights accionables</h4>
+                                <p class="text-gray-400">La abundancia de datos sin análisis impide tomar decisiones estratégicas oportunas.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="text-primary text-xl mr-4 mt-1">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Escalabilidad limitada</h4>
+                                <p class="text-gray-400">Los sistemas tradicionales no crecen al ritmo de tu negocio, generando cuellos de botella.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Business Challenges" class="rounded-xl w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <div class="bg-primary bg-opacity-10 border border-primary rounded-xl p-8">
+                <h3 class="text-3xl font-bold mb-6 text-center">Beneficios clave de AIQuick</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Disponibilidad 24/7</h4>
+                        <p class="text-gray-400">Atiende a tus clientes en cualquier momento sin aumentar tu nómina.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">+40% Conversiones</h4>
+                        <p class="text-gray-400">Chatbots que guían a tus clientes en el proceso de compra aumentando tus ventas.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">-60% Costos</h4>
+                        <p class="text-gray-400">Automatización de procesos que reduce errores y ahorra recursos.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <div class="text-primary text-3xl mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Decisiones inteligentes</h4>
+                        <p class="text-gray-400">Análisis predictivo que anticipa tendencias y comportamientos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Nuestros <span class="text-primary">Servicios</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Soluciones de automatización diseñadas para impulsar tu negocio en la era digital
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-800 p-8 rounded-xl transition duration-300 hover:border-primary border border-gray-700">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Asistentes Virtuales 24/7</h3>
+                    <p class="text-gray-400 mb-6">
+                        Chatbots inteligentes que atienden a tus clientes en cualquier momento, reduciendo tiempos de espera y mejorando la satisfacción.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Respuestas inmediatas</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Integración con múltiples canales</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Aprendizaje continuo</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-800 p-8 rounded-xl transition duration-300 hover:border-primary border border-gray-700">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Automatización de Procesos</h3>
+                    <p class="text-gray-400 mb-6">
+                        Robots de software que ejecutan tareas repetitivas con precisión, liberando a tu equipo para trabajo de mayor valor.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Procesamiento de datos</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Gestión de inventarios</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Facturación automática</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-800 p-8 rounded-xl transition duration-300 hover:border-primary border border-gray-700">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Análisis Predictivo</h3>
+                    <p class="text-gray-400 mb-6">
+                        Modelos de IA que anticipan tendencias y comportamientos, permitiéndote tomar decisiones basadas en datos.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Predicción de ventas</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Detección de fraudes</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-primary mr-2"></i> Personalización de ofertas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Cómo <span class="text-primary">Funciona</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Implementamos soluciones de IA en 4 sencillos pasos
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="bg-primary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+                    <h3 class="text-xl font-bold mb-3">Diagnóstico</h3>
+                    <p class="text-gray-400">
+                        Analizamos tus procesos para identificar oportunidades de automatización.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="bg-primary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+                    <h3 class="text-xl font-bold mb-3">Diseño</h3>
+                    <p class="text-gray-400">
+                        Creamos una solución personalizada para tus necesidades específicas.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="bg-primary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+                    <h3 class="text-xl font-bold mb-3">Implementación</h3>
+                    <p class="text-gray-400">
+                        Desplegamos la solución con integración perfecta a tus sistemas.
+                    </p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="bg-primary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">4</div>
+                    <h3 class="text-xl font-bold mb-3">Optimización</h3>
+                    <p class="text-gray-400">
+                        Monitoreamos y mejoramos continuamente el rendimiento.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="AI Process" class="rounded-xl mx-auto max-w-4xl w-full shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Lo que dicen <span class="text-primary">nuestros clientes</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Empresas que han transformado sus operaciones con AIQuick
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">María González</h4>
+                            <p class="text-gray-400 text-sm">CEO, TiendaVirtual</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        "Los chatbots de AIQuick han reducido nuestro tiempo de respuesta de horas a segundos. Nuestros clientes están encantados y nuestras ventas han aumentado un 30%."
+                    </p>
+                    <div class="text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Carlos Martínez</h4>
+                            <p class="text-gray-400 text-sm">Director, LogiTech</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        "La automatización de procesos nos ha permitido reducir errores humanos en un 95% y ahorrar más de $15,000 mensuales en costos operativos."
+                    </p>
+                    <div class="text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Ana Rodríguez</h4>
+                            <p class="text-gray-400 text-sm">CFO, FinanciaPlus</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        "Los modelos predictivos de AIQuick han revolucionado nuestra gestión de riesgos. Ahora anticipamos problemas antes de que ocurran."
+                    </p>
+                    <div class="text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-black to-gray-900">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">¿Listo para transformar tu negocio con IA?</h2>
+            <p class="text-xl text-gray-300 mb-10">
+                Agenda una demostración gratuita y descubre cómo AIQuick puede impulsar tu empresa al siguiente nivel.
+            </p>
+            <a href="#contact" class="bg-primary hover:bg-red-700 text-white px-10 py-4 rounded-full font-bold text-lg transition inline-block">
+                Solicitar demo <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Contáctanos</h2>
+                    <p class="text-xl text-gray-400 mb-8">
+                        Completa el formulario y nuestro equipo se pondrá en contacto contigo en menos de 24 horas.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-primary text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Correo de soporte</h4>
+                                <p class="text-gray-400">aiquick.soporte@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700">
+                    <form id="contact-form">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-300 mb-2">Nombre completo</label>
+                            <input type="text" id="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-300 mb-2">Correo electrónico</label>
+                            <input type="email" id="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="company" class="block text-gray-300 mb-2">Empresa</label>
+                            <input type="text" id="company" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-300 mb-2">¿Cómo podemos ayudarte?</label>
+                            <textarea id="message" rows="4" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-3 rounded-lg font-bold transition">
+                            Enviar mensaje <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-primary font-bold text-2xl mr-2"><i class="fas fa-bolt"></i></span>
+                        <span class="text-white font-bold text-2xl">AI<span class="text-primary">Quick</span></span>
+                    </div>
+                    <p class="text-gray-400">
+                        Líderes en soluciones de automatización con inteligencia artificial para empresas digitales. Fundada en 2020, hemos ayudado a más de 200 empresas a transformar sus operaciones.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Servicios</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Chatbots Inteligentes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Automatización de Procesos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Análisis Predictivo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Integración con CRM</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Asistentes Virtuales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Automatización de Marketing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Empresa</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Nuestra Historia</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Equipo de Expertos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Trabaja con Nosotros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Casos de Éxito</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Blog y Noticias</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Eventos y Webinars</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Términos de Servicio</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Política de Privacidad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Protección de Datos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Seguridad de la Información</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Contratos y SLA</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Aviso Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    © 2023 AIQuick. Todos los derechos reservados.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary text-xl transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary text-xl transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary text-xl transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary text-xl transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chatbot functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeChatbot = document.getElementById('close-chatbot');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const sendMessage = document.getElementById('send-message');
+            
+            // Toggle chatbot visibility
+            chatbotToggle.addEventListener('click', function() {
+                chatbotContainer.classList.toggle('hidden');
+            });
+            
+            closeChatbot.addEventListener('click', function() {
+                chatbotContainer.classList.add('hidden');
+            });
+            
+            // Send message functionality
+            function sendUserMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Simulate bot response after a delay
+                    setTimeout(() => {
+                        const responses = [
+                            "Entiendo tu consulta sobre nuestros servicios de automatización. ¿Te gustaría que te explique más sobre cómo podemos ayudar a tu empresa?",
+                            "Gracias por tu mensaje. Nuestros agentes de IA pueden reducir tus costos operativos hasta en un 60%. ¿En qué área necesitas ayuda?",
+                            "Interesante pregunta. Nuestros chatbots empresariales tienen un tiempo de respuesta promedio de 2 segundos. ¿Quieres una demostración?",
+                            "Para esa consulta, te recomendaría nuestro plan Profesional. ¿Quieres que te envíe más detalles por correo?"
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(randomResponse, 'bot');
+                    }, 1000);
+                }
+            }
+            
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('mb-4');
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('bg-gray-800', 'rounded-lg', 'p-3', 'inline-block', 'max-w-xs');
+                
+                if (sender === 'user') {
+                    contentDiv.classList.add('ml-auto', 'bg-primary', 'text-white');
+                    messageDiv.classList.add('text-right');
+                }
+                
+                contentDiv.textContent = text;
+                messageDiv.appendChild(contentDiv);
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Event listeners for sending messages
+            sendMessage.addEventListener('click', sendUserMessage);
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendUserMessage();
+                }
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Anonhack/aiquick" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
